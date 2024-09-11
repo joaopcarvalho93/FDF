@@ -6,7 +6,7 @@
 /*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:47:06 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/05/10 12:07:55 by jhorta-c         ###   ########.fr       */
+/*   Updated: 2024/09/11 19:15:33 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 # define UPPER_CASE "0123456789ABCDEF"
 # define LOWER_CASE "0123456789abcdef"
@@ -85,5 +86,7 @@ int					ft_putstr(char *str);
 int					ft_putunsnbr(unsigned int n);
 long				ft_atol(const char *str);
 void				ft_free_array(char **str);
-void				ft_free_array1(char **str);
+void				ft_error(char *msg);
+size_t				ft_filelen(char	*file);
+int long			ft_arraylen(char **str);
 #endif

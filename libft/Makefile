@@ -6,7 +6,7 @@
 #    By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 13:28:10 by jhorta-c          #+#    #+#              #
-#    Updated: 2024/04/30 16:20:40 by jhorta-c         ###   ########.fr        #
+#    Updated: 2024/09/11 18:37:46 by jhorta-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ SOURCES = ft_memset.c \
 	ft_free_array.c \
 	ft_printf.c \
 	ft_printf_utils.c \
+	ft_error.c \
+	ft_filelen.c \
 	
 BSOURCES = \
 	ft_lstnew.c \
