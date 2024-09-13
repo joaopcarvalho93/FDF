@@ -6,7 +6,7 @@
 /*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:24:14 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/09/11 22:40:54 by jhorta-c         ###   ########.fr       */
+/*   Updated: 2024/09/12 19:45:29 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,17 @@ t_map	read_map(char *file, int y_max)
 	map.z_max = 0;
 	map.z_min = 0;
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
+	if (!fd)
 		return ((t_map){NULL, -1, -1}); // verificar
 	map.matrix = malloc(sizeof(int *) * y_max);
 	while ((str = get_next_line(fd)) == NULL)
 	{
 		map.matrix[i] = fill_vector(str, &map);
+		free(srt);
+		i++;
 	}
+	map.y_max = i
+	close (fd);
+	return (map);
 	
 }

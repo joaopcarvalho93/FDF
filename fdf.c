@@ -6,7 +6,7 @@
 /*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:18:15 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/09/11 18:39:01 by jhorta-c         ###   ########.fr       */
+/*   Updated: 2024/09/12 19:42:05 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ void	fdf(char *file)
 	t_map	map;
 
 	y_max = ft_filelen(file);
-	map = 
+	map = read_map(file, y_max);
+	
 }
