@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:24:14 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/09/12 19:45:29 by jhorta-c         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:30:27 by jpcarvalho       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,26 @@
 
 static int	*fill_vector(char *line, t_map *map)
 {
-	int	*vector;
-	int	i;
-	char	**str;
+	int		*vector;
+	char	**split;
+	int		i;
 
-	str = ft_split(line, ' ');
-	vector = malloc(sizeof(int) * (ft_arraylen(str)));
 	i = 0;
-	while (str[i])
+	split = ft_split(line, ' ');
+	while (split[i])
+		i++;
+	map->x_max = i;
+	vector = malloc(sizeof(int) * i);
+	i = 0;
+	while (split[i])
 	{
-		vector[i] = ft_atoi(str[i]);
+		vector[i] = ft_atoi(split[i]);
 		if (vector[i] > map->z_max)
 			map->z_max = vector[i];
 		if (vector[i] < map->z_min)
 			map->z_min = vector[i];
 		i++;
 	}
-	map->x_max = i;
-	ft_free_array(str);
 	return (vector);
 }
 
@@ -40,24 +42,22 @@ t_map	read_map(char *file, int y_max)
 {
 	t_map	map;
 	int		fd;
+	char	*line;
 	int		i;
-	char	*str;
 
-	i = 0;
+	map.y_max = y_max;
 	map.z_max = 0;
 	map.z_min = 0;
-	fd = open(file, O_RDONLY);
-	if (!fd)
-		return ((t_map){NULL, -1, -1}); // verificar
 	map.matrix = malloc(sizeof(int *) * y_max);
-	while ((str = get_next_line(fd)) == NULL)
+	fd = open(file, O_RDONLY);
+	i = 0;
+	while (get_next_line(fd, &line))
 	{
-		map.matrix[i] = fill_vector(str, &map);
-		free(srt);
+		map.matrix[i] = fill_vector(line, &map);
+		free(line);
 		i++;
 	}
-	map.y_max = i
-	close (fd);
+	close(fd);
 	return (map);
-	
 }
+

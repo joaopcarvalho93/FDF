@@ -3,34 +3,48 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+         #
+#    By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/11 13:37:54 by jhorta-c          #+#    #+#              #
-#    Updated: 2024/09/11 13:37:55 by jhorta-c         ###   ########.fr        #
+#    Updated: 2024/09/25 13:15:16 by jpcarvalho       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
+NAME = fdf
 
 #----------------------------LIBFT SOURCE FILES----------------------------------------------------------------------------------------------------
-LIBFT_PATH = ./libft
+LIBFT_PATH = ./lib/libft/
 LIBFT_LIB = $(LIBFT_PATH)/libft.a
 
-#----------------------------MAINFILES----------------------------------------------------------------------------------------------------
+$(LIBFT_LIB):
+	$(MAKE) -C $(LIBFT_PATH) --no-print-directory
 
-NAME_SERVER = server
-NAME_CLIENT = client
-CLIENT_SRCS = client.c
-SERVER_SRCS = server.c
-CLIENT_BONUS_SRCS = client_bonus.c
-SERVER_BONUS_SRCS = server_bonus.c
-SRCOBJ = objects/
-SRCOBJ_BONUS = objects_bonus/
-SRC = CLIENT_SRCS SERVER_SRCS
-SRC_BONUS = CLIENT_BONUS_SRCS SERVER_BONUS_SRCS
+#----------------------------GNL SOURCE FILES----------------------------------------------------------------------------------------------------
+GNL_PATH = ./lib/get_next_line/
+GNL_LIB = $(GNL_PATH)/libgnl.a
+
+$(GNL_LIB):
+	$(MAKE) -C $(GNL_PATH) --no-print-directory
+
+#----------------------------MINILIBX SOURCE FILES----------------------------------------------------------------------------------------------------
+MLX_PATH = ./lib/minilibx-linux/
+MLX_LIB = -L$(MLX_PATH) -lmlx -lXext -lX11 -lm
+
+$(MLX_LIB):
+	$(MAKE) -C $(MLX_PATH) --no-print-directory
+
+#----------------------------PROJECT----------------------------------------------------------------------------------------------------
+
+SRCS_DIR = srcs/
+OBJS_DIR = srcs/objs/
+
+SRCS_LIST = main.c fdf.c read_map.c draw.c
+
+SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LIST))
+OBJS = $(addprefix $(OBJS_DIR), $(SRCS_LIST:.c=.o))
 
 
-#----------------------------TESTER AND COLOURS----------------------------------------------------------------------------------------------------
+#----------------------------COLOURS----------------------------------------------------------------------------------------------------
 
 GREEN = \033[1;32m
 ORANGE = \033[1;33m
@@ -41,78 +55,31 @@ RESET = \033[0m
 
 #----------------------------COMPILATION----------------------------------------------------------------------------------------------------
 
-
-
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-SERVER_OBJ = $(addprefix $(SRCOBJ), $(SERVER_SRCS:.c=.o))
-CLIENT_OBJ = $(addprefix $(SRCOBJ), $(CLIENT_SRCS:.c=.o))
-SERVER_BONUS_OBJ = $(addprefix $(SRCOBJ_BONUS), $(SERVER_BONUS_SRCS:.c=.o))
-CLIENT_BONUS_OBJ = $(addprefix $(SRCOBJ_BONUS), $(CLIENT_BONUS_SRCS:.c=.o))
 RM = rm -rf
 
+#----------------------------MAKEFILE RULES----------------------------------------------------------------------------------------------------
 
-all: $(NAME_SERVER) $(NAME_CLIENT)
 
-$(LIBFT_LIB):
-	$(MAKE) -C $(LIBFT_PATH) --no-print-directory
+all: $(NAME)
 
-$(NAME_CLIENT): $(CLIENT_OBJ) $(LIBFT_LIB)
-	@echo "Compiling server..."
-	$(CC) $(CFLAGS) $(CLIENT_OBJ) -o $(NAME_CLIENT) $(LIBFT_LIB)
-	@echo "$(CYAN)make$(RESET) $@ $(GREEN)[OK]$(RESET)"
+$(NAME): $(LIBFT_LIB) $(GNL_LIB) $(MLX_LIB) $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(GNL_LIB) $(MLX_LIB) -o $(NAME)
+	@echo "$(GREEN)$(NAME) compiled!$(RESET)"
 
-$(NAME_SERVER): $(SERVER_OBJ) $(LIBFT_LIB)
-	@echo "Compiling client..."
-	$(CC) $(CFLAGS) $(SERVER_OBJ) -o $(NAME_SERVER) $(LIBFT_LIB)
-	@echo "$(CYAN)make$(RESET) $@ $(GREEN)[OK]$(RESET)"
-
-$(SRCOBJ)%.o: %.c
-		@mkdir -p $(SRCOBJ)
-		@mkdir -p $(dir $@)
-		@$(CC) $(CFLAGS) -c $< -o $@
-
-bonus: $(NAME_CLIENT)_bonus $(NAME_SERVER)_bonus
-
-$(NAME_CLIENT)_bonus: $(CLIENT_BONUS_OBJ) $(LIBFT_LIB)
-	@echo "Compiling client bonus..."
-	$(CC) $(CFLAGS) $(CLIENT_BONUS_OBJ) -o $(NAME_CLIENT)_bonus $(LIBFT_LIB)
-	@echo "$(CYAN)make$(RESET) $@ $(GREEN)[OK]$(RESET)"
-
-$(NAME_SERVER)_bonus: $(SERVER_BONUS_OBJ) $(LIBFT_LIB)
-	@echo "Compiling server bonus..."
-	$(CC) $(CFLAGS) $(SERVER_BONUS_OBJ) -o $(NAME_SERVER)_bonus $(LIBFT_LIB)
-	@echo "$(CYAN)make$(RESET) $@ $(GREEN)[OK]$(RESET)"
-
-$(SRCOBJ_BONUS)%.o: %.c
-		@mkdir -p $(SRCOBJ_BONUS)
-		@mkdir -p $(dir $@)
-		@$(CC) $(CFLAGS) -c $< -o $@
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
+	@mkdir -p $(OBJS_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(CYAN)Compiling: $<$(RESET)"
 
 clean:
-	$(RM) $(SRCOBJ) 
-	$(RM) $(SRCOBJ_BONUS)
-	@echo "Cleaning objects...$(GREEN)[OK]$(RESET)"
-	@$(MAKE) -C $(LIBFT_PATH) clean --no-print-directory
-	@echo "$(CYAN)make$(RESET) $@ $(GREEN)[OK]$(RESET)"
+	@$(RM) $(OBJS_DIR)
+	@echo "$(ORANGE)$(NAME) objects removed!$(RESET)"
+
 fclean: clean
-	$(RM) $(NAME_SERVER) $(NAME_CLIENT) $(NAME_CLIENT)_bonus $(NAME_SERVER)_bonus
-	@echo "Cleaning $(NAME_SERVER) and $(NAME_CLIENT) and $(NAME_CLIENT)_bonus and $(NAME_SERVER)_bonus...$(GREEN)[OK]$(RESET)"
-	$(MAKE) -C $(LIBFT_PATH) fclean --no-print-directory
-	@echo "$(CYAN)make$(RESET) $@ $(GREEN)[OK]$(RESET)"
+	@$(RM) $(NAME)
+	@echo "$(RED)$(NAME) removed!$(RESET)"
 
-fnorm :
-	@$(MAKE) -s fclean
-	@python3 -m c_formatter_42 $(SRC) */*h
-	norminette $(SRC) */*h
-
-fnorm_bonus :
-	@$(MAKE) -s fclean
-	@python3 -m c_formatter_42 $(SRC_BONUS) */*h
-	norminette $(SRC_BONUS) */*h
 
 re: fclean all
-
-bonus: $(CLIENT_BONUS_NAME) $(SERVER_BONUS_NAME)
-
-.PHONY: all clean fclean re bonus
