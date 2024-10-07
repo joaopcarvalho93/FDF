@@ -6,7 +6,7 @@
 /*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 13:37:42 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/09/26 18:09:38 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/04 16:36:37 by jpcarvalho       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ typedef struct s_map
 	int		line_width;
 	int		line_height;
 	int		**matrix;
-	int		line_width;
-	int		line_height;
 	char	*map_name;
+	int		start_x;
+	int		start_y;
+	float	zoom;
+	float	rotation_x;
+	float	rotation_y;
 
 }	t_map;
 

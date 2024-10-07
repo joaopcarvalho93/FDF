@@ -6,7 +6,7 @@
 /*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:24:14 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/09/26 16:30:27 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/04 16:31:53 by jpcarvalho       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static int	*fill_vector(char *line, t_map *map)
 			map->z_min = vector[i];
 		i++;
 	}
+	ft_free_array(split);
 	return (vector);
 }
 
@@ -45,18 +46,24 @@ t_map	read_map(char *file, int y_max)
 	char	*line;
 	int		i;
 
-	map.y_max = y_max;
-	map.z_max = 0;
-	map.z_min = 0;
-	map.matrix = malloc(sizeof(int *) * y_max);
-	fd = open(file, O_RDONLY);
+	map.z_max = INT_MIN;
+	map.z_min = INT_MAX;
 	i = 0;
-	while (get_next_line(fd, &line))
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		ft_error("Error opening file");
+	map.matrix = malloc(sizeof(int *) * (y_max));
+	while (1)
 	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
 		map.matrix[i] = fill_vector(line, &map);
 		free(line);
 		i++;
 	}
+	map.y_max = i;
+	init_vars(&map);
 	close(fd);
 	return (map);
 }
