@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/jpcarvalho/42_Lisboa/projetos_outras_pessoas/FDF/fdf_tlouro-c/src",
+      "program": "/Users/jpcarvalho/42_Lisboa/projetos_outras_pessoas/FDF/fdf_tlouro-c/src/build/Debug/outDebug"
+    }
+  ]
+}
