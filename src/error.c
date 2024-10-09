@@ -1,5 +1,5 @@
 
-#include "../includes/fdf.h"
+#include "fdf.h"
 
 void	check_connection(void *mlx)
 {
@@ -31,4 +31,19 @@ void	check_image(t_mlx *mlx, void *img)
 		ft_putstr_fd("Error\nImage creation failed\n", 2);
 		exit(1);
 	}
+}
+
+void	free_matrix(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < map->y_max)
+	{
+		free(map->matrix[i]);
+		map->matrix[i] = NULL;
+		i++;
+	}
+	free(map->matrix);
+	map->matrix = NULL;
 }
