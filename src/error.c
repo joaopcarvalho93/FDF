@@ -1,5 +1,5 @@
 
-#include "fdf.h"
+#include "../include/fdf.h"
 
 void	check_connection(void *mlx)
 {
@@ -47,3 +47,4 @@ void	free_matrix(t_map *map)
 	free(map->matrix);
 	map->matrix = NULL;
 }
+

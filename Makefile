@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+         #
+#    By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/11 13:37:54 by jhorta-c          #+#    #+#              #
-#    Updated: 2024/09/25 13:15:16 by jpcarvalho       ###   ########.fr        #
+#    Updated: 2024/10/10 16:00:29 by jhorta-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ $(GNL_LIB):
 	$(MAKE) -C $(GNL_PATH) --no-print-directory
 
 #----------------------------MINILIBX SOURCE FILES----------------------------------------------------------------------------------------------------
-MLX_PATH = ./lib/minilibx-linux/
+MLX_PATH = ./lib/minilibx_linux/
 MLX_LIB = -L$(MLX_PATH) -lmlx -lXext -lX11 -lm
 
 $(MLX_LIB):

@@ -1,5 +1,5 @@
 
-#include "fdf.h"
+#include "../includes/fdf.h"
 
 //The purpose of this function is to check if a vertex is inside the frame of the screen.
 //The function takes a vertex as an argument.
