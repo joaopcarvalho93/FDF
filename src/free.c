@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 16:47:07 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/10 16:47:21 by jhorta-c         ###   ########.fr       */
+/*   Created: 2024/10/10 16:42:35 by jhorta-c          #+#    #+#             */
+/*   Updated: 2024/10/10 16:42:38 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../include/fdf.h"
 
-int	main(int argc, char *argv[])
+void	free_matrix(t_map *map)
 {
-	if (argc == 2)
+	int	i;
+
+	i = 0;
+	while (i < map->y_max)
 	{
-		fdf(argv[1]);
+		free(map->matrix[i]);
+		map->matrix[i] = NULL;
+		i++;
 	}
-	else
-		ft_error("wrong arguments");
+	free(map->matrix);
+	map->matrix = NULL;
 }

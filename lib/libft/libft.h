@@ -6,7 +6,7 @@
 /*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:47:06 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/09/11 19:15:33 by jhorta-c         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:20:20 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include "../get_next_line/get_next_line.h"
 
 # define UPPER_CASE "0123456789ABCDEF"
 # define LOWER_CASE "0123456789abcdef"

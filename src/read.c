@@ -6,11 +6,11 @@
 /*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:24:14 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/10 13:01:34 by jhorta-c         ###   ########.fr       */
+/*   Updated: 2024/10/10 16:46:43 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../include/fdf.h"
 
 
 static int	*fill_vector(char *line, t_map *map)

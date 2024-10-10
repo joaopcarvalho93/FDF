@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/10 16:43:19 by jhorta-c          #+#    #+#             */
+/*   Updated: 2024/10/10 16:44:09 by jhorta-c         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "../include/fdf.h"
 
@@ -33,18 +45,4 @@ void	check_image(t_mlx *mlx, void *img)
 	}
 }
 
-void	free_matrix(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	while (i < map->y_max)
-	{
-		free(map->matrix[i]);
-		map->matrix[i] = NULL;
-		i++;
-	}
-	free(map->matrix);
-	map->matrix = NULL;
-}
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_filelen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:42:02 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/03 17:58:24 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/10 19:19:09 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ size_t	ft_filelen(char *file)
 	char	*str;
 
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (0);
+	if (!fd)
+		return (-1);
 	i = 0;
-	str = get_next_line(fd);
-	while (str != NULL)
+	while (1)
 	{
+		str = get_next_line(fd);
 		free(str);
 		i++;
-		str = get_next_line(fd);
 	}
 	close(fd);
 	return (i);

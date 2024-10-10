@@ -12,7 +12,7 @@ INCLUDE_DIR = ./include
 SRC_DIR = ./src
 OBJ_DIR = ./obj
 LIBFT_DIR = ./libft
-MINILIBX_DIR = ./minilibx-linux
+MINILIBX_DIR = ./minilibx_linux
 #MINILIBX_MAC_DIR = ./minilibx
 
 SRC_FILES =  $(SRC_DIR)/main.c \

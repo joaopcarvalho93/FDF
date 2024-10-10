@@ -6,7 +6,7 @@
 #    By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/11 13:37:54 by jhorta-c          #+#    #+#              #
-#    Updated: 2024/10/10 16:00:29 by jhorta-c         ###   ########.fr        #
+#    Updated: 2024/10/10 19:29:23 by jhorta-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,15 @@ $(MLX_LIB):
 SRCS_DIR = srcs/
 OBJS_DIR = srcs/objs/
 
-SRCS_LIST = main.c fdf.c read_map.c draw.c
+SRCS_LIST = $(SRCS_DIR)/main.c \
+			$(SRCS_DIR)/fdf.c \
+			$(SRCS_DIR)/read.c \
+			$(SRCS_DIR)/drawing.c \
+			$(SRCS_DIR)/error.c \
+			$(SRCS_DIR)/free.c \
+			$(SRCS_DIR)/init.c \
+			$(SRCS_DIR)/keys.c \
+			
 
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LIST))
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS_LIST:.c=.o))
