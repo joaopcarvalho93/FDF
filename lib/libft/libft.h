@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:47:06 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/10 19:20:20 by jhorta-c         ###   ########.fr       */
+/*   Updated: 2024/10/11 19:18:56 by jpcarvalho       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,13 @@ void				ft_free_array(char **str);
 void				ft_error(char *msg);
 size_t				ft_filelen(char	*file);
 int long			ft_arraylen(char **str);
+char				*ft_strchr_gnl(const char *s, int c);
+int					ft_strlen_gnl(const char *str);
+char				*ft_strdup_gnl(const char *s);
+char				*ft_strjoin_gnl(char const *s1, char const *s2);
+char				*ft_read_file(int fd, char *text, char *buffer);
+char				*ft_freeline(char *string);
+char				*get_next_line(int fd);
+char				*ft_substr_gnl(char const *s, unsigned int start,
+						size_t len);
 #endif

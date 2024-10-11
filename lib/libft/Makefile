@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+         #
+#    By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 13:28:10 by jhorta-c          #+#    #+#              #
-#    Updated: 2024/09/11 18:37:46 by jhorta-c         ###   ########.fr        #
+#    Updated: 2024/10/11 19:10:24 by jpcarvalho       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,8 @@ SOURCES = ft_memset.c \
 	ft_printf_utils.c \
 	ft_error.c \
 	ft_filelen.c \
+	get_next_line.c \
+	get_next_line_utils.c \
 	
 BSOURCES = \
 	ft_lstnew.c \

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+         #
+#    By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/11 13:37:54 by jhorta-c          #+#    #+#              #
-#    Updated: 2024/10/10 19:29:23 by jhorta-c         ###   ########.fr        #
+#    Updated: 2024/10/11 19:21:47 by jpcarvalho       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,18 +19,11 @@ LIBFT_LIB = $(LIBFT_PATH)/libft.a
 $(LIBFT_LIB):
 	$(MAKE) -C $(LIBFT_PATH) --no-print-directory
 
-#----------------------------GNL SOURCE FILES----------------------------------------------------------------------------------------------------
-GNL_PATH = ./lib/get_next_line/
-GNL_LIB = $(GNL_PATH)/libgnl.a
-
-$(GNL_LIB):
-	$(MAKE) -C $(GNL_PATH) --no-print-directory
-
 #----------------------------MINILIBX SOURCE FILES----------------------------------------------------------------------------------------------------
 MLX_PATH = ./lib/minilibx_linux/
-MLX_LIB = -L$(MLX_PATH) -lmlx -lXext -lX11 -lm
+MLX_FLAGS = -L$(MLX_PATH) -lmlx -lXext -lX11 -lm
 
-$(MLX_LIB):
+build_mlx:
 	$(MAKE) -C $(MLX_PATH) --no-print-directory
 
 #----------------------------PROJECT----------------------------------------------------------------------------------------------------
@@ -38,14 +31,15 @@ $(MLX_LIB):
 SRCS_DIR = srcs/
 OBJS_DIR = srcs/objs/
 
-SRCS_LIST = $(SRCS_DIR)/main.c \
-			$(SRCS_DIR)/fdf.c \
-			$(SRCS_DIR)/read.c \
-			$(SRCS_DIR)/drawing.c \
-			$(SRCS_DIR)/error.c \
-			$(SRCS_DIR)/free.c \
-			$(SRCS_DIR)/init.c \
-			$(SRCS_DIR)/keys.c \
+SRCS_LIST = main.c \
+			fdf.c \
+			read.c \
+			drawing1.c \
+			drawing2.c \
+			error.c \
+			free.c \
+			init.c \
+			keys.c \
 			
 
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LIST))
@@ -72,8 +66,8 @@ RM = rm -rf
 
 all: $(NAME)
 
-$(NAME): $(LIBFT_LIB) $(GNL_LIB) $(MLX_LIB) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(GNL_LIB) $(MLX_LIB) -o $(NAME)
+$(NAME): $(LIBFT_LIB) $(GNL_LIB) build_mlx $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(GNL_LIB) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled!$(RESET)"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c

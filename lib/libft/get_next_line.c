@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:37:16 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/09/11 14:04:16 by jhorta-c         ###   ########.fr       */
+/*   Updated: 2024/10/11 19:09:50 by jpcarvalho       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 char	*ft_read_file(int fd, char *text, char *buffer)
 {
@@ -27,12 +27,12 @@ char	*ft_read_file(int fd, char *text, char *buffer)
 			break ;
 		buffer[i_read] = '\0';
 		if (!text)
-			text = ft_strdup("");
+			text = ft_strdup_gnl("");
 		tmp = text;
-		text = ft_strjoin(tmp, buffer);
+		text = ft_strjoin_gnl(tmp, buffer);
 		free (tmp);
 		tmp = NULL;
-		if (ft_strchr(buffer, '\n'))
+		if (ft_strchr_gnl(buffer, '\n'))
 			break ;
 	}
 	return (text);
@@ -48,7 +48,7 @@ char	*ft_freeline(char *string)
 		i++;
 	if (string[i] == '\0')
 		return (NULL);
-	line = ft_substr(string, i + 1, ft_strlen_gnl(string) - i);
+	line = ft_substr_gnl(string, i + 1, ft_strlen_gnl(string) - i);
 	if (*line == '\0')
 	{
 		free(line);

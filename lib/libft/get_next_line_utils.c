@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:57:49 by jpcarvalho        #+#    #+#             */
-/*   Updated: 2024/09/11 14:04:39 by jhorta-c         ###   ########.fr       */
+/*   Updated: 2024/10/11 19:09:36 by jpcarvalho       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 int	ft_strlen_gnl(const char *str)
 {
@@ -22,7 +22,7 @@ int	ft_strlen_gnl(const char *str)
 	return (count);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup_gnl(const char *s)
 {
 	char	*ptr;
 	int		i;
@@ -42,7 +42,7 @@ char	*ft_strdup(const char *s)
 	return (ptr);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_gnl(char const *s1, char const *s2)
 {
 	unsigned int	size;
 	unsigned int	i;
@@ -71,7 +71,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (join);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr_gnl(const char *s, int c)
 {
 	while (*s)
 	{
@@ -84,7 +84,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr_gnl(char const *s, unsigned int start, size_t len)
 {
 	char	*sub;
 	size_t	i;
@@ -95,7 +95,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	s_len = ft_strlen_gnl((char *)s);
 	if (start >= s_len)
-		return (ft_strdup(""));
+		return (ft_strdup_gnl(""));
 	if (start + len > s_len)
 		len = s_len - start;
 	sub = (char *)malloc((len +1) * sizeof(char));
