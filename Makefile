@@ -6,7 +6,7 @@
 #    By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/11 13:37:54 by jhorta-c          #+#    #+#              #
-#    Updated: 2024/10/14 13:09:02 by jpcarvalho       ###   ########.fr        #
+#    Updated: 2024/10/14 14:26:27 by jpcarvalho       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,18 +62,16 @@ INCLUDE = ./includes/
 
 all: $(NAME)
 
-
+$(LIBFT_LIB):
+	@make -s -C $(LIBFT_PATH) --no-print-directory
 
 $(NAME): $(OBJS) $(LIBFT_LIB) $(MLX_LIB) 
-	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_PATH) -lft$(MLX_FLAGS)  -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_PATH) -lft $(MLX_FLAGS)  -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled!$(RESET)"
 
 $(MLX_LIB):
 	@chmod 777 $(MLX_PATH)configure
 	@make -s -C $(MLX_PATH) all
-
-$(LIBFT_LIB):
-	@make -s -C $(LIBFT_PATH) all
 	
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
@@ -82,11 +80,12 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 
 clean:
 	@$(RM) $(OBJS_DIR)
+	@$(MAKE) -C $(LIBFT_PATH) clean --no-print-directory
 	@echo "$(ORANGE)$(NAME) objects removed!$(RESET)"
 
 fclean: clean
 	@$(RM) $(NAME)
-	@make -C $(LIBFT_PATH) fclean
+	@make -C $(LIBFT_PATH) fclean --no-print-directory
 	@echo "$(RED)$(NAME) removed!$(RESET)"
 
 

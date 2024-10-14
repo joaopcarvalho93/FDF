@@ -4,7 +4,7 @@
 
 
 #include <stdlib.h>
-#include "../lib/minilibx_linux/mlx.h"
+#include "../lib/mlx_linux/mlx.h"
 
 # define WINDOW_WIDTH 600
 # define WINDOW_HEIGHT 300

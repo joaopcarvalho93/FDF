@@ -59,7 +59,7 @@ clean:
 	@if [ -d "$(OBJ_DIR)" ]; then 		rm -rf $(OBJ_DIR); 	fi
 
 fclean: clean
-	@cd $(MINILIBX_DIR) && rm -f $(MINILIBX_ARQ)
+	@cd $(MINILIBX_DIR) && rm -f $(MINILIBX_ARQ) 
 	@rm -f $(NAME)
 	@rm -f $(LIBFT_DIR)/libft.a
 
