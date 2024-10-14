@@ -6,7 +6,7 @@
 /*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:18:15 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/14 12:04:29 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/14 18:15:59 by jpcarvalho       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	int_window(t_map *map, t_mlx *mlx, char *filename)
 	check_image(mlx, data.img);
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel,
 			&data.line_length, &data.endian);
+	if (!data.addr)
+		ft_error("Failed to get image data address");
 }
 
 void	fdf(char *file)
@@ -34,10 +36,15 @@ void	fdf(char *file)
 	t_mlx	mlx;
 	t_all	all;
 	t_data	data;
-	
+
 	mlx.mlx = mlx_init();
 	y_max = ft_filelen(file);
-	read_map(file, y_max, &map);
+	if (y_max == -1)
+	{
+		ft_error("Failed to read the file");
+		return;
+	}
+	map = read_map(file, y_max);
 	init_vars(&map, &mlx, &data, &all);
 	int_window(&map, &mlx, file);
 	draw_map(&data, &map);
@@ -46,5 +53,5 @@ void	fdf(char *file)
 	mlx_hook(mlx.win, 17, 1L << 17, close_window, &all);
 	mlx_hook(mlx.win, 2, 1L << 0, handle_keypress, &all);
 	mlx_loop(mlx.mlx);
-	
+
 }

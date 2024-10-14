@@ -6,26 +6,12 @@
 /*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:50:25 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/14 13:01:06 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/14 18:18:34 by jpcarvalho       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-
-//The purpose of this function is to calculate the
-// new color of a pixel on the screen.
-//The function takes the base color, the end color, the
-// number of steps, and the position as arguments.
-//The function calculates the incrementor for each color
-// channel using the formula:
-//incrementor = (end_color - base_color) / steps
-//The function then calculates the new red, green, and 
-//blue values using the formula:
-//new_red = base_color.red + (incrementor.red * pos)
-//new_green = base_color.green + (incrementor.green * pos)
-//new_blue = base_color.blue + (incrementor.blue * pos)
-//The function returns the new color as an unsigned integer.
 
 static unsigned int	new_color(int base_color, int end_color, int steps, int pos)
 {
@@ -43,28 +29,6 @@ static unsigned int	new_color(int base_color, int end_color, int steps, int pos)
 	new_blue = (base_color & 0xFF) + ((int)roundf(incrementor[2] * pos));
 	return (new_red << 16 | new_green << 8 | new_blue);
 }
-
-//The purpose of this function is to draw a line between two points 
-//on the screen.
-//The function takes a pointer to the data structure and two vertices
-// as arguments.
-//The function calculates the number of steps needed to draw the line
-// using the formula:
-//steps = max(fabsf(vertex2.x - vertex1.x), fabsf(vertex2.y - vertex1.y))
-//The function then calculates the x and y increments using the formula:
-//x_increment = (vertex2.x - vertex1.x) / steps
-//y_increment = (vertex2.y - vertex1.y) / steps
-//The function then calculates the base color of the line 
-//using the color of the first vertex.
-//The function then iterates over the number of steps and calculates 
-//the x and y coordinates of each point on the line using the formula:
-//x = vertex1.x + (i * x_increment)
-//y = vertex1.y + (i * y_increment)
-//The function then calculates the new color of the point using
-// the new_color function.
-//The function then renders the point on the screen using the 
-//my_mlx_pixel_put function.
-//The function does not return a value.
 
 void	draw_line(t_data *data, t_vertex vertex1, t_vertex vertex2)
 {
@@ -95,12 +59,6 @@ void	draw_line(t_data *data, t_vertex vertex1, t_vertex vertex2)
 	}
 }
 
-//The purpose of this function is to draw the map on the screen.
-//The function takes a pointer to the data structure and a pointer
-// to the map structure as arguments.
-//The function iterates over all the vertices in the matrix and 
-//renders each vertex on the screen using the my_mlx_pixel_put function.
-//The function does not return a value.
 
 void	draw_map(t_data *data, t_map *map)
 {
@@ -124,19 +82,16 @@ void	draw_map(t_data *data, t_map *map)
 					* (map->line_height * map-> z_axis));
 			if (is_inside_frame(map->matrix[row][col]))
 				my_mlx_pixel_put(data, map->matrix[row][col]);
+			else
+			{
+				// Optional: Print a message if the vertex is outside the frame
+                printf("Vertex at row %d, col %d is outside the frame: (%f, %f)\n", row, col, map->matrix[row][col].x, map->matrix[row][col].y);
+			}
 			col++;
 		}
 		row++;
 	}
 }
-//The purpose of this function is to draw lines between the vertices 
-//in the matrix to form a grid.
-//The function takes a pointer to the data structure and a pointer to
-// the map structure as arguments.
-//The function iterates over all the vertices in the matrix and draws
-// lines between adjacent vertices.
-//The function calls the draw_line function to draw lines between the vertices.
-//The function does not return a value.
 
 void	join_vertex(t_data *data, t_map *map)
 {

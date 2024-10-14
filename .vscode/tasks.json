@@ -1,0 +1,37 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "gcc",  // or "g++" for C++
+            "args": [
+                "-g",               // Include debugging symbols
+                "src/main.c",      // Change to your source files
+                "src/fdf.c",
+                "src/read.c",
+                "src/drawing1.c",
+                "src/drawing2.c",
+                "src/error.c",
+                "src/free.c",
+                "src/init.c",
+                "src/keys.c",
+                "-o", "fdf",       // Output executable name
+                "-L./lib/libft",   // Link to your libft
+                "-lft",
+                "-L./lib/mlx_linux", // Link to your MiniLibX
+                "-lmlx_Linux",
+                "-lXext",
+                "-lX11",
+                "-lm",
+                "-lz"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],  // Use gcc problem matcher for error reporting
+            "detail": "Generated task by debugging"
+        }
+    ]
+}

@@ -120,7 +120,7 @@ void	free_matrix(t_map *map);
 
 //map
 
-void	read_map(char *file, int y_max, t_map *map);
+t_map	read_map(char *file, int y_max);
 
 
 //init

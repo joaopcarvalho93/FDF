@@ -1,13 +1,40 @@
 {
   "version": "0.2.0",
   "configurations": [
+    
+    {
+      "name": "Debug my_program",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/fdf",
+      "args": [
+        "./maps/42.fdf"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "text": "-enable-pretty-printing",
+          "description": "Enable pretty-printing for gdb",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "build",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "logging": {
+        "engineLogging": true
+      }
+    },
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/jpcarvalho/42_Lisboa/FDF/src",
-      "program": "/Users/jpcarvalho/42_Lisboa/FDF/src/build/Debug/outDebug"
+      "cwd": "/Users/jpcarvalho/Documents/SHARED_LINUX/42_Lisboa/FDF/src",
+      "program": "/Users/jpcarvalho/Documents/SHARED_LINUX/42_Lisboa/FDF/src/build/Debug/outDebug"
     }
   ]
 }

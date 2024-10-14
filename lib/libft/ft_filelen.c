@@ -19,12 +19,17 @@ size_t	ft_filelen(char *file)
 	char	*str;
 
 	fd = open(file, O_RDONLY);
-	if (!fd)
+	if (fd == -1)
+	{
+		perror("Error opening file");
 		return (-1);
+	}
 	i = 0;
 	while (1)
 	{
 		str = get_next_line(fd);
+		if (!str)
+			break;
 		free(str);
 		i++;
 	}

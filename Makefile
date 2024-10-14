@@ -6,7 +6,7 @@
 #    By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/11 13:37:54 by jhorta-c          #+#    #+#              #
-#    Updated: 2024/10/14 14:26:27 by jpcarvalho       ###   ########.fr        #
+#    Updated: 2024/10/14 15:32:04 by jpcarvalho       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ RESET = \033[0m
 #----------------------------COMPILATION----------------------------------------------------------------------------------------------------
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE)
+CFLAGS = -g3 -Wall -Wextra -Werror -I $(INCLUDE)
 RM = rm -rf
 INCLUDE = ./includes/
 
