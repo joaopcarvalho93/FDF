@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:24:14 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/10 16:46:43 by jhorta-c         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:24:22 by jpcarvalho       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
 
-static int	*fill_vector(char *line, t_map *map)
+static t_vertex	*fill_vector(char *line, t_map *map)
 {
-	int		*vector;
+	t_vertex		*vector;
 	char	**split;
 	int		i;
 
@@ -23,18 +23,19 @@ static int	*fill_vector(char *line, t_map *map)
 	split = ft_split(line, ' ');
 	while (split[i])
 		i++;
-	map->x_max = i;
 	vector = malloc(sizeof(int) * i);
 	i = 0;
 	while (split[i])
 	{
-		vector[i] = ft_atoi(split[i]);
-		if (vector[i] > map->z_max)
-			map->z_max = vector[i];
-		if (vector[i] < map->z_min)
-			map->z_min = vector[i];
+		vector[i].value = ft_atoi(split[i]);
+		if (vector[i].value > map->z_max)
+			map->z_max = vector[i].value;
+		if (vector[i].value < map->z_min)
+			map->z_min = vector[i].value;
+		vector[i].color = 0x00FFFFFF;
 		i++;
 	}
+	map->x_max = i;
 	ft_free_array(split);
 	return (vector);
 }
@@ -51,13 +52,13 @@ void	read_map(char *file, int y_max, t_map *map)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		ft_error("Error opening file");
-	map->matrix = malloc(sizeof(int *) * (y_max));
+	map->matrix = malloc(sizeof(t_vertex *) * (y_max));
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		map->matrix[i] = fill_vector(line, &map);
+		map->matrix[i] = fill_vector(line, map);
 		free(line);
 		i++;
 	}

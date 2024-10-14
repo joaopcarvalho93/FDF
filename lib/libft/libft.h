@@ -6,7 +6,7 @@
 /*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:47:06 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/11 19:18:56 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/14 13:02:08 by jpcarvalho       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include "../get_next_line/get_next_line.h"
 
 # define UPPER_CASE "0123456789ABCDEF"
 # define LOWER_CASE "0123456789abcdef"
 # define BASE16 16
 # define BASE10 10
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif
 
 typedef struct s_list
 {

@@ -6,11 +6,11 @@
 /*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:18:15 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/09 18:40:42 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/14 12:04:29 by jpcarvalho       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../include/fdf.h"
 
 void	int_window(t_map *map, t_mlx *mlx, char *filename)
 {
@@ -20,9 +20,9 @@ void	int_window(t_map *map, t_mlx *mlx, char *filename)
 	check_connection(mlx->mlx);
 	mlx->win = mlx_new_window(mlx->mlx, SCREEN_WIDTH, SCREEN_HEIGHT,
 			map->map_name);
-	check_window(&mlx);
+	check_window(mlx);
 	data.img = mlx_new_image(mlx->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	check_image(&mlx, data.img);
+	check_image(mlx, data.img);
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel,
 			&data.line_length, &data.endian);
 }

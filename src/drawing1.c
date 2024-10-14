@@ -6,12 +6,43 @@
 /*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:50:25 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/11 17:28:57 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/14 13:01:06 by jpcarvalho       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
+
+//The purpose of this function is to calculate the
+// new color of a pixel on the screen.
+//The function takes the base color, the end color, the
+// number of steps, and the position as arguments.
+//The function calculates the incrementor for each color
+// channel using the formula:
+//incrementor = (end_color - base_color) / steps
+//The function then calculates the new red, green, and 
+//blue values using the formula:
+//new_red = base_color.red + (incrementor.red * pos)
+//new_green = base_color.green + (incrementor.green * pos)
+//new_blue = base_color.blue + (incrementor.blue * pos)
+//The function returns the new color as an unsigned integer.
+
+static unsigned int	new_color(int base_color, int end_color, int steps, int pos)
+{
+	float			incrementor[3];
+	int				new_red;
+	int				new_green;
+	int				new_blue;
+
+	incrementor[0] = ((end_color >> 16) - (base_color >> 16)) / (float)steps;
+	incrementor[1] = ((end_color >> 8 & 0xFF) - (base_color >> 8 & 0xFF))
+		/ (float)steps;
+	incrementor[2] = ((end_color & 0xFF) - (base_color & 0xFF)) / (float)steps;
+	new_red = (base_color >> 16) + ((int)roundf(incrementor[0] * pos));
+	new_green = (base_color >> 8 & 0xFF) + ((int)roundf(incrementor[1] * pos));
+	new_blue = (base_color & 0xFF) + ((int)roundf(incrementor[2] * pos));
+	return (new_red << 16 | new_green << 8 | new_blue);
+}
 
 //The purpose of this function is to draw a line between two points 
 //on the screen.
@@ -19,7 +50,7 @@
 // as arguments.
 //The function calculates the number of steps needed to draw the line
 // using the formula:
-//steps = max(abs(vertex2.x - vertex1.x), abs(vertex2.y - vertex1.y))
+//steps = max(fabsf(vertex2.x - vertex1.x), fabsf(vertex2.y - vertex1.y))
 //The function then calculates the x and y increments using the formula:
 //x_increment = (vertex2.x - vertex1.x) / steps
 //y_increment = (vertex2.y - vertex1.y) / steps
@@ -43,10 +74,10 @@ void	draw_line(t_data *data, t_vertex vertex1, t_vertex vertex2)
 	float	y_increment;
 	int		i;
 
-	if (abs(vertex2.x - vertex1.x) > abs(vertex2.y - vertex1.y))
-		steps = abs(vertex2.x - vertex1.x);
+	if (fabsf(vertex2.x - vertex1.x) > fabsf(vertex2.y - vertex1.y))
+		steps = fabsf(vertex2.x - vertex1.x);
 	else
-		steps = abs(vertex2.y - vertex1.y);
+		steps = fabsf(vertex2.y - vertex1.y);
 	if (steps <= 0)
 		return ;
 	x_increment = ((float)vertex2.x - vertex1.x) / (float)steps;
@@ -91,7 +122,7 @@ void	draw_map(t_data *data, t_map *map)
 			map->matrix[row][col].y = map->start_y + (col * y_increment)
 				+ (row * y_increment) - (map->matrix[row][col].value
 					* (map->line_height * map-> z_axis));
-			if (is_inside_frame(map-> map[row][col]))
+			if (is_inside_frame(map->matrix[row][col]))
 				my_mlx_pixel_put(data, map->matrix[row][col]);
 			col++;
 		}
@@ -129,3 +160,5 @@ void	join_vertex(t_data *data, t_map *map)
 		row++;
 	}
 }
+
+

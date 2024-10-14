@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 13:37:42 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/10 17:07:43 by jhorta-c         ###   ########.fr       */
+/*   Updated: 2024/10/14 11:51:08 by jpcarvalho       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@
 # include <errno.h>
 # include <string.h>
 # include <stdbool.h>
-# include "./lib/libft/libft.h"
-# include "./lib/get_next_line/get_next_line.h"
-# include "./lib/minilibx_linux/mlx.h"
+# include "../lib/libft/libft.h"
+# include "../lib/mlx_linux/mlx.h"
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
@@ -48,24 +47,6 @@
 # define LINE_WIDTH 20
 # define LINE_HEIGHT 20
 
-typedef struct s_map
-{
-	int				x_max; //The maximum number of columns in the matrix.
-	int				y_max; //The maximum number of rows in the matrix.
-	int				z_max; //The maximum z value in the matrix.
-	int				z_min; //The minimum z value in the matrix.
-	float			line_width; //The width of each line in the matrix.
-	float			line_height; //The height of each line in the matrix.
-	t_vertex		**matrix; //The matrix of vertices.
-	char			*map_name; //The name of the map file.
-	int				start_x; //The x coordinate of the center of the screen.
-	int				start_y; //The y coordinate of the center of the screen.
-	float			zoom; //The zoom level of the map.
-	float			rotation_x; //The rotation angle around the x axis.
-	float			rotation_y; //The rotation angle around the y axis.
-	float			z_axis; //The z axis value.
-
-}	t_map;
 
 typedef struct s_mlx
 {
@@ -98,6 +79,25 @@ typedef struct s_vertex
 	t_rgb			rgb; //The red, green, and blue values of the vertex.
 }	t_vertex;
 
+typedef struct s_map
+{
+	int				x_max; //The maximum number of columns in the matrix.
+	int				y_max; //The maximum number of rows in the matrix.
+	int				z_max; //The maximum z value in the matrix.
+	int				z_min; //The minimum z value in the matrix.
+	float			line_width; //The width of each line in the matrix.
+	float			line_height; //The height of each line in the matrix.
+	t_vertex		**matrix; //The matrix of vertices.
+	char			*map_name; //The name of the map file.
+	int				start_x; //The x coordinate of the center of the screen.
+	int				start_y; //The y coordinate of the center of the screen.
+	float			zoom; //The zoom level of the map.
+	float			rotation_x; //The rotation angle around the x axis.
+	float			rotation_y; //The rotation angle around the y axis.
+	float			z_axis; //The z axis value.
+
+}	t_map;
+
 typedef struct s_all
 {
 	t_map	*map;
@@ -108,9 +108,8 @@ typedef struct s_all
 
 //draw
 
-int	is_inside_frame(t_vertex vertex);
+int		is_inside_frame(t_vertex vertex);
 void	my_mlx_pixel_put(t_data *data, t_vertex vertex);
-static unsigned int	new_color(int base_color, int end_color, int steps, int pos);
 void	draw_line(t_data *data, t_vertex vertex1, t_vertex vertex2);
 void	draw_map(t_data *data, t_map *map);
 void	join_vertex(t_data *data, t_map *map);
@@ -122,7 +121,7 @@ void	free_matrix(t_map *map);
 //map
 
 void	read_map(char *file, int y_max, t_map *map);
-static int	*fill_vector(char *line, t_map *map);
+
 
 //init
 
@@ -138,7 +137,7 @@ void	check_image(t_mlx *mlx, void *img);
 
 //keys
 
-int	close_window(t_all *all);
-int	handle_keypress(int keycode, t_all *all);
+int		close_window(t_all *all);
+int		handle_keypress(int keycode, t_all *all);
 
 #endif

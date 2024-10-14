@@ -6,7 +6,7 @@
 #    By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/11 13:37:54 by jhorta-c          #+#    #+#              #
-#    Updated: 2024/10/11 19:21:47 by jpcarvalho       ###   ########.fr        #
+#    Updated: 2024/10/14 13:09:02 by jpcarvalho       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,20 +16,16 @@ NAME = fdf
 LIBFT_PATH = ./lib/libft/
 LIBFT_LIB = $(LIBFT_PATH)/libft.a
 
-$(LIBFT_LIB):
-	$(MAKE) -C $(LIBFT_PATH) --no-print-directory
 
 #----------------------------MINILIBX SOURCE FILES----------------------------------------------------------------------------------------------------
-MLX_PATH = ./lib/minilibx_linux/
-MLX_FLAGS = -L$(MLX_PATH) -lmlx -lXext -lX11 -lm
-
-build_mlx:
-	$(MAKE) -C $(MLX_PATH) --no-print-directory
+MLX_PATH = ./lib/mlx_linux/
+MLX_LIB = $(MLX_PATH)/libmlx_Linux.a
+MLX_FLAGS = -L$(MLX_PATH) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 
 #----------------------------PROJECT----------------------------------------------------------------------------------------------------
 
-SRCS_DIR = srcs/
-OBJS_DIR = srcs/objs/
+SRCS_DIR = src/
+OBJS_DIR = src/objs/
 
 SRCS_LIST = main.c \
 			fdf.c \
@@ -41,7 +37,6 @@ SRCS_LIST = main.c \
 			init.c \
 			keys.c \
 			
-
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LIST))
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS_LIST:.c=.o))
 
@@ -58,18 +53,28 @@ RESET = \033[0m
 #----------------------------COMPILATION----------------------------------------------------------------------------------------------------
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE)
 RM = rm -rf
+INCLUDE = ./includes/
 
 #----------------------------MAKEFILE RULES----------------------------------------------------------------------------------------------------
 
 
 all: $(NAME)
 
-$(NAME): $(LIBFT_LIB) $(GNL_LIB) build_mlx $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(GNL_LIB) $(MLX_FLAGS) -o $(NAME)
+
+
+$(NAME): $(OBJS) $(LIBFT_LIB) $(MLX_LIB) 
+	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_PATH) -lft$(MLX_FLAGS)  -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled!$(RESET)"
 
+$(MLX_LIB):
+	@chmod 777 $(MLX_PATH)configure
+	@make -s -C $(MLX_PATH) all
+
+$(LIBFT_LIB):
+	@make -s -C $(LIBFT_PATH) all
+	
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -81,6 +86,7 @@ clean:
 
 fclean: clean
 	@$(RM) $(NAME)
+	@make -C $(LIBFT_PATH) fclean
 	@echo "$(RED)$(NAME) removed!$(RESET)"
 
 
