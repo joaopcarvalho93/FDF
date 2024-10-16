@@ -6,7 +6,7 @@
 /*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 13:37:42 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/14 11:51:08 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/16 16:25:38 by jpcarvalho       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,36 +108,38 @@ typedef struct s_all
 
 //draw
 
-int		is_inside_frame(t_vertex vertex);
-void	my_mlx_pixel_put(t_data *data, t_vertex vertex);
-void	draw_line(t_data *data, t_vertex vertex1, t_vertex vertex2);
-void	draw_map(t_data *data, t_map *map);
-void	join_vertex(t_data *data, t_map *map);
+int				is_inside_frame(t_vertex vertex);
+void			my_mlx_pixel_put(t_data *data, t_vertex vertex);
+void			draw_line(t_data *data, t_vertex vertex1, t_vertex vertex2);
+void			draw_map(t_data *data, t_map *map);
+void			join_vertex(t_data *data, t_map *map);
+unsigned int	calculate_color_based_on_value(int value, t_map *map);
 
 //free
 
-void	free_matrix(t_map *map);
+void			free_matrix(t_map *map);
 
 //map
 
-t_map	read_map(char *file, int y_max);
+void			read_map(char *file, t_map *map);
 
 
 //init
 
-void	fdf(char *file);
-void	int_window(t_map *map, t_mlx *mlx, char *filename);
-void	init_vars(t_map *map, t_mlx *mlx, t_data *data, t_all *all);
+void			fdf(char *file);
+void			int_window(t_map *map, t_mlx *mlx, t_data *data,
+					char *filename);
+void			init_vars(t_map *map, t_mlx *mlx, t_data *data, t_all *all);
 
 //error
 
-void	check_connection(void *mlx);
-void	check_window(t_mlx *mlx);
-void	check_image(t_mlx *mlx, void *img);
+void			check_mlx_int(void *mlx);
+void			check_window(t_mlx *mlx);
+void			check_image(t_mlx *mlx, void *img);
 
 //keys
 
-int		close_window(t_all *all);
-int		handle_keypress(int keycode, t_all *all);
+int				close_window(t_all *all);
+int				handle_keypress(int keycode, t_all *all);
 
 #endif

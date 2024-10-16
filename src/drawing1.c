@@ -6,7 +6,7 @@
 /*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:50:25 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/14 18:18:34 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/16 10:10:09 by jpcarvalho       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	draw_map(t_data *data, t_map *map)
 	float	x_increment;
 	float	y_increment;
 
-	x_increment = map->line_width / 2;
-	y_increment = map->line_height / 2;
+	x_increment = (map->line_width / 2) * map->zoom;
+	y_increment = (map->line_height / 2) * map->zoom;
 	row = 0;
 	while (row < map -> y_max)
 	{
@@ -82,11 +82,11 @@ void	draw_map(t_data *data, t_map *map)
 					* (map->line_height * map-> z_axis));
 			if (is_inside_frame(map->matrix[row][col]))
 				my_mlx_pixel_put(data, map->matrix[row][col]);
-			else
-			{
+			//else
+			//{
 				// Optional: Print a message if the vertex is outside the frame
-                printf("Vertex at row %d, col %d is outside the frame: (%f, %f)\n", row, col, map->matrix[row][col].x, map->matrix[row][col].y);
-			}
+              //  printf("Vertex at row %d, col %d is outside the frame: (%f, %f)\n", row, col, map->matrix[row][col].x, map->matrix[row][col].y);
+			//}
 			col++;
 		}
 		row++;

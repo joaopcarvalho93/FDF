@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:43:19 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/10 16:44:09 by jhorta-c         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:16:15 by jpcarvalho       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../include/fdf.h"
 
-void	check_connection(void *mlx)
+void	check_mlx_int(void *mlx)
 {
 	if (!mlx)
 	{
