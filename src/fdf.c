@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:18:15 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/16 16:25:55 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/17 16:22:39 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	fdf(char *file)
 	check_mlx_int(mlx.mlx);
 	int_window(&map, &mlx, &data, file);
 	init_vars(&map, &mlx, &data, &all);
-	read_map(file, &map);
-	init_vars(&map, &mlx, &data, &all);
+	read_map(file, &map, &data, &mlx);
+	adjust_map_to_screen(&map); 
 	draw_map(&data, &map);
 	join_vertex(&data, &map);
 	free_matrix(&map);

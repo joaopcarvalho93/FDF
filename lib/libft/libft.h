@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:47:06 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/14 13:02:08 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/17 16:16:30 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,5 @@ char				*ft_freeline(char *string);
 char				*get_next_line(int fd);
 char				*ft_substr_gnl(char const *s, unsigned int start,
 						size_t len);
+int					ft_strcmp(const char *s1, const char *s2);
 #endif

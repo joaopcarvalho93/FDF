@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 13:37:42 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/16 16:25:38 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/17 16:24:07 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,11 @@
 # define Z_AXIS_UP 113
 # define Z_AXIS_DOWN 101
 # define RESET 114
-# define LINE_WIDTH 20
-# define LINE_HEIGHT 20
+# define LINE_WIDTH 15
+# define LINE_HEIGHT 15
+# define DEGREE_30 0.523599
+# define DEGREE_60 1.0472
+# define M_PI 3.14159265358979323846
 
 
 typedef struct s_mlx
@@ -95,6 +98,10 @@ typedef struct s_map
 	float			rotation_x; //The rotation angle around the x axis.
 	float			rotation_y; //The rotation angle around the y axis.
 	float			z_axis; //The z axis value.
+	//int				edge;
+	//int				width;
+	// int				tile_width;
+	// int				tile_height;
 
 }	t_map;
 
@@ -114,6 +121,7 @@ void			draw_line(t_data *data, t_vertex vertex1, t_vertex vertex2);
 void			draw_map(t_data *data, t_map *map);
 void			join_vertex(t_data *data, t_map *map);
 unsigned int	calculate_color_based_on_value(int value, t_map *map);
+void 			adjust_map_to_screen(t_map *map); 
 
 //free
 
@@ -121,7 +129,7 @@ void			free_matrix(t_map *map);
 
 //map
 
-void			read_map(char *file, t_map *map);
+void			read_map(char *file, t_map *map, t_data *data, t_mlx *mlx);
 
 
 //init
@@ -136,6 +144,8 @@ void			init_vars(t_map *map, t_mlx *mlx, t_data *data, t_all *all);
 void			check_mlx_int(void *mlx);
 void			check_window(t_mlx *mlx);
 void			check_image(t_mlx *mlx, void *img);
+int				file_checker(char *arg);
+void			close_window_error(t_mlx *mlx, t_data *data);
 
 //keys
 

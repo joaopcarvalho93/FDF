@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:50:25 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/16 10:10:09 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/17 17:24:58 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	draw_map(t_data *data, t_map *map)
 	float	x_increment;
 	float	y_increment;
 
-	x_increment = (map->line_width / 2) * map->zoom;
-	y_increment = (map->line_height / 2) * map->zoom;
+	x_increment = map->line_width / 2;
+	y_increment = map->line_height / 2;
 	row = 0;
 	while (row < map -> y_max)
 	{
@@ -82,11 +82,6 @@ void	draw_map(t_data *data, t_map *map)
 					* (map->line_height * map-> z_axis));
 			if (is_inside_frame(map->matrix[row][col]))
 				my_mlx_pixel_put(data, map->matrix[row][col]);
-			//else
-			//{
-				// Optional: Print a message if the vertex is outside the frame
-              //  printf("Vertex at row %d, col %d is outside the frame: (%f, %f)\n", row, col, map->matrix[row][col].x, map->matrix[row][col].y);
-			//}
 			col++;
 		}
 		row++;
@@ -104,9 +99,11 @@ void	join_vertex(t_data *data, t_map *map)
 		col = 0;
 		while (col < map->x_max)
 		{
+			// if (col + 2 < map->x_max)
 			if (col + 1 < map->x_max)
 				draw_line(data, map->matrix[row][col],
 					map->matrix[row][col + 1]);
+			// if (row + 2 < map->y_max)
 			if (row + 1 < map->y_max)
 				draw_line(data, map->matrix[row][col],
 					map->matrix[row + 1][col]);

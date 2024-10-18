@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:24:14 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/16 17:20:01 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/17 17:26:21 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_vertex	*fill_vector(char *line, t_map *map)
 	return (vector);
 }
 
-void	read_map(char *file, t_map *map)
+void	read_map(char *file, t_map *map, t_data *data, t_mlx *mlx)
 {
 	int		fd;
 	char	*line;
@@ -56,11 +56,14 @@ void	read_map(char *file, t_map *map)
 	map->y_max = 0;
 	if (map -> zoom < 0.5)
 		map -> zoom = 0.5;
-	map->line_width = SCREEN_WIDTH * map->zoom;
+	map->line_width = LINE_WIDTH * map->zoom;
 	i = 0;
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
+	if (fd < 0)
+	{
+		close_window_error(mlx, data);
 		ft_error("Error opening file");
+	}
 	map->y_max = ft_filelen(file);
 	map->matrix = malloc(sizeof(t_vertex *) * (map->y_max));
 	if (!map->matrix)
@@ -79,4 +82,3 @@ void	read_map(char *file, t_map *map)
 	map->y_max = i;
 	close(fd);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:43:19 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/16 15:16:15 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/17 16:18:11 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,23 @@ void	check_image(t_mlx *mlx, void *img)
 	}
 }
 
+int	file_checker(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	i -= 4;
+	return (ft_strcmp(&(str[i]), ".fdf"));
+}
+
+void	close_window_error(t_mlx *mlx, t_data *data)
+{
+	mlx_destroy_image(mlx -> mlx, data -> img);
+	mlx_destroy_window(mlx -> mlx, mlx -> win);
+	mlx_destroy_display(mlx -> mlx);
+	free(mlx -> mlx);
+	exit (1);
+}
 

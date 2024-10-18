@@ -59,3 +59,49 @@ void	my_mlx_pixel_put(t_data *data, t_vertex vertex)
 	*(unsigned int *)address = vertex.color;
 	//printf("passou\n"); //teste
 }
+
+
+// void adjust_map_to_screen(t_map *map) 
+// {
+//     float max_x_size;
+//     float max_y_size;
+// 	float zoom_x;
+// 	float zoom_y;
+// 	int	min_tile_size;
+// 	int tile_size1;
+// 	int tile_size2;
+
+// 	max_x_size = map->x_max * map->line_width;
+// 	max_y_size = map->y_max * map->line_height;
+//     zoom_x = SCREEN_WIDTH / max_x_size;
+//     zoom_y = SCREEN_HEIGHT / max_y_size;
+//     map->zoom = fmin(1, fmin(zoom_x, zoom_y));
+
+//     map->line_width = map->line_width * map->zoom;
+//     map->line_height = map->line_height * map->zoom;
+// 	tile_size1 = (SCREEN_WIDTH * 0.5) / (map->x_max - 1);
+//     tile_size2 = (SCREEN_HEIGHT * 0.5) / (map->y_max - 1);
+// 	min_tile_size = 5;
+//     map->edge = fmax(min_tile_size, fmin(tile_size1, tile_size2));
+
+// 	map->line_width = map->edge * map->zoom;
+// 	map->line_height = map->edge * map->zoom;
+
+// 	// map->start_x = (SCREEN_WIDTH - (map->x_max * map->line_width)) / 2;
+//     // map->start_y = (SCREEN_HEIGHT - (map->y_max * map->line_height)) / 2;
+// }
+
+void adjust_map_to_screen(t_map *map)
+{
+	while((map->x_max * map->line_width) > (SCREEN_WIDTH - map->start_x))
+	{
+		map->line_width /= 2;
+		//map->z_axis -= 0.2;
+	}
+	while (((map->y_max * map->line_height)) > (SCREEN_HEIGHT - map->start_y))
+	{
+		map->line_height /= 2;
+	}
+	// map->start_x = (SCREEN_WIDTH - (map->x_max * map->line_width)) / 2;
+	// map->start_y = (SCREEN_HEIGHT - (map->y_max * map->line_height)) / 2;
+}
