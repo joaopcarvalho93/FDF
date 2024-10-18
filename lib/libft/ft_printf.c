@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 15:27:00 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/11 18:46:44 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/18 19:17:57 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	ft_putnbr(long n, int base)
 
 int	ft_printformat(char specifier, va_list ap)
 {
-
 	if (specifier == 'c')
 		return (ft_putchar(va_arg(ap, int)));
 	else if (specifier == 's')

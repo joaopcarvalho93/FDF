@@ -6,7 +6,7 @@
 /*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:42:02 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/10 19:19:09 by jhorta-c         ###   ########.fr       */
+/*   Updated: 2024/10/18 19:18:50 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ size_t	ft_filelen(char *file)
 	{
 		str = get_next_line(fd);
 		if (!str)
-			break;
+			break ;
 		free(str);
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpcarvalho <jpcarvalho@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:44:59 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/16 17:19:13 by jpcarvalho       ###   ########.fr       */
+/*   Updated: 2024/10/18 18:40:50 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	handle_keypress(int keycode, t_all *all)
 		free(all -> mlx -> mlx);
 		exit (0);
 	}
-	//mlx_clear_window(all->mlx->mlx, all->mlx->win);
 	return (0);
 }
 

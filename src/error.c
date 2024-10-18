@@ -6,10 +6,9 @@
 /*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:43:19 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/17 16:18:11 by jhorta-c         ###   ########.fr       */
+/*   Updated: 2024/10/18 19:13:56 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/fdf.h"
 
@@ -48,20 +47,28 @@ void	check_image(t_mlx *mlx, void *img)
 int	file_checker(char *str)
 {
 	int	i;
+	int	count;
 
 	i = 0;
+	count = 0;
 	while (str[i] != '\0')
+	{
+		if (str[i] == '.')
+			count++;
 		i++;
+	}
+	if (count != 2)
+		return (-1);
 	i -= 4;
 	return (ft_strcmp(&(str[i]), ".fdf"));
 }
 
 void	close_window_error(t_mlx *mlx, t_data *data)
 {
+	printf("Error opening file");
 	mlx_destroy_image(mlx -> mlx, data -> img);
 	mlx_destroy_window(mlx -> mlx, mlx -> win);
 	mlx_destroy_display(mlx -> mlx);
 	free(mlx -> mlx);
 	exit (1);
 }
-

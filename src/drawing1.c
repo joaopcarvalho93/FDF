@@ -6,12 +6,11 @@
 /*   By: jhorta-c <jhorta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:50:25 by jhorta-c          #+#    #+#             */
-/*   Updated: 2024/10/17 17:24:58 by jhorta-c         ###   ########.fr       */
+/*   Updated: 2024/10/18 18:35:04 by jhorta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-
 
 static unsigned int	new_color(int base_color, int end_color, int steps, int pos)
 {
@@ -59,7 +58,6 @@ void	draw_line(t_data *data, t_vertex vertex1, t_vertex vertex2)
 	}
 }
 
-
 void	draw_map(t_data *data, t_map *map)
 {
 	int		row;
@@ -67,19 +65,19 @@ void	draw_map(t_data *data, t_map *map)
 	float	x_increment;
 	float	y_increment;
 
-	x_increment = map->line_width / 2;
-	y_increment = map->line_height / 2;
+	x_increment = (float)map->tile_width / 2;
+	y_increment = (float) map->tile_height / 2;
 	row = 0;
 	while (row < map -> y_max)
 	{
 		col = 0;
-		while (col < map-> x_max)
+		while (col < map->x_max)
 		{
 			map->matrix[row][col].x = map->start_x + (col * x_increment)
 				- (row * x_increment);
 			map->matrix[row][col].y = map->start_y + (col * y_increment)
 				+ (row * y_increment) - (map->matrix[row][col].value
-					* (map->line_height * map-> z_axis));
+					* (map->tile_height * map-> z_axis));
 			if (is_inside_frame(map->matrix[row][col]))
 				my_mlx_pixel_put(data, map->matrix[row][col]);
 			col++;
@@ -99,11 +97,9 @@ void	join_vertex(t_data *data, t_map *map)
 		col = 0;
 		while (col < map->x_max)
 		{
-			// if (col + 2 < map->x_max)
 			if (col + 1 < map->x_max)
 				draw_line(data, map->matrix[row][col],
 					map->matrix[row][col + 1]);
-			// if (row + 2 < map->y_max)
 			if (row + 1 < map->y_max)
 				draw_line(data, map->matrix[row][col],
 					map->matrix[row + 1][col]);
@@ -112,5 +108,3 @@ void	join_vertex(t_data *data, t_map *map)
 		row++;
 	}
 }
-
-
